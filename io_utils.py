@@ -32,13 +32,11 @@ def read_label(label_path):
 
 def read_and_reshape(img_path, labels_path, img_shape=(1024,512), dataset='CITYSCAPES'):
     # Reads an image/label pair and reshapes it to the desired shape
-
     assert dataset in ['CITYSCAPES', 'SYNTHIA', 'GTA5']
-
     try:
         # Read Images
-        img = np.asarray(imageio.imread(img_path, format='PNG-FI'))
-        labels = np.asarray(imageio.imread(labels_path, format='PNG-FI'))
+        img = np.asarray(imageio.imread(img_path, format='PNG'))
+        labels = np.asarray(imageio.imread(labels_path, format='PNG'))
         
         if dataset == 'SYNTHIA':
             # Synthia labels come in a 2-channel format
@@ -53,8 +51,9 @@ def read_and_reshape(img_path, labels_path, img_shape=(1024,512), dataset='CITYS
 
         labels = Image.fromarray(labels).resize((img_shape[0], img_shape[1]), Image.NEAREST)
         labels = np.asarray(labels)
-
+        
         return img, labels
-    except:
-        print("Failed on", labels_path)   
+    except Exception as e:
+        print(e, img_path, labels_path)
+        # print("Failed on", labels_path)   
         return None, None
