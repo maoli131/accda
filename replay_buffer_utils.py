@@ -10,6 +10,7 @@ class replay_buffer:
     # portion: the portion of files in data_dir will form replay buffer
     def __init__(self, data_dir, portion):
         self.capacity = int(portion * len(os.listdir(data_dir)))
+        print(self.capacity)
         self.images, self.labels = utils.sample_batch(data_dir, batch_size = self.capacity)
 
         

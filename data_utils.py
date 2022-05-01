@@ -10,10 +10,11 @@ import io_utils as io
 
 def process_gta5(img_shape = (1024,512), \
                  img_dir = "./data/GTA5/images/", \
-                 label_dir = "./data/GTA5/labels/", \
-                 target_dir = "./processed-data/1024x512/19_classes/GTA5/train/", \
+                 label_dir = "./data/GTA5/labels", \
+                 target_dir = "./processed-data/1024x512/19_classes/GTA5/train", \
                  target_label_ids = None):
     '''
+    
         read_gta5 reads images in the GTA5 data format, and saves these images in
             .npy format to a target directory
         

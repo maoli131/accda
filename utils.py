@@ -129,7 +129,7 @@ def sample_from_gaussians(means, covs, n_samples):
     return res_x[perm,:], res_y[perm]
 
 
-def compute_miou(data_dir, model, label_ids, id_to_ignore = 0):
+def compute_miou(data_dir, model, label_ids, ids_to_ignore = [0]):
     # Returns the mean IoU for every class, and averages over all classes
     # label_ids is a dict of label_name -> label_idx
     
@@ -147,7 +147,7 @@ def compute_miou(data_dir, model, label_ids, id_to_ignore = 0):
         y_hat = model.predict(X).ravel()
         
         for label in label_ids:
-            if label_ids[label] == id_to_ignore:
+            if label_ids[label] in ids_to_ignore:
                 continue
                 
             curr_id = label_ids[label]
@@ -161,7 +161,7 @@ def compute_miou(data_dir, model, label_ids, id_to_ignore = 0):
     mIoU = []
     res = dict()
     for label in label_ids:
-        if label_ids[label] == id_to_ignore:
+        if label_ids[label] in ids_to_ignore:
             continue
             
         if union[label] != 0:
